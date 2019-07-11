@@ -1,6 +1,7 @@
 package myFunctions;
 
 import java.util.Scanner;
+import org.openqa.selenium.JavascriptExecutor;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,6 +46,17 @@ public class Browser {
 			
 	}
 
+	
+	// A function that receives the webdiver, and verifying it stays focus on the test-window.
+	public static void Focus (WebDriver driver) throws Exception{
+		
+		String testWindowHandle = driver.getWindowHandle();	// Saving the current test-window handle
+		((JavascriptExecutor)driver).executeScript("alert('Test')"); 	// Running  javascript and alert code:
+		driver.switchTo().alert().accept();	// Every time the driver is focusing on other window,
+		driver.switchTo().window(testWindowHandle);	//	It focusing back to to the test-window 
+
+			
+	}
 	
 	
 }

@@ -12,8 +12,6 @@ import org.openqa.selenium.interactions.Actions;
 import myFunctions.myException;
 import myFunctions.Youtube;
 
-
-
 //Error handling tests for YouTube site:
 //#1  Verifying error due to invalid video uploading.
 //#2  Verifying error due to creating a new brand account with an invalid name.
@@ -42,13 +40,14 @@ public class tests_error_exersize3 extends tests {
 		if(false==driver.findElement(By.xpath("//iframe[@class='picker modal-dialog-bg']")).getAttribute("aria-hidden").equals("true")){	// If we managed to open the Google-Photo frame, it's source code will change.
 			fail("Failed opening Google-Photo frame");
 		}	
+		//**********************
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='picker-frame']"))); // Switching to Google-Photos-frame, to work with it's elements.
 	
 		try{	
 			// When a video uploaded, there is a button called "YouTube Studio" that appears even after the upload fails.
 			// However if the video managed to upload, this button is replaced by another button called "Return to YouTube Studio (beta)". 
 
-			WebElement sampleVideo = driver.findElement(By.xpath("//div[@class='Nf-Zm-Jg-qh-zj Nf-Jg-qh-f']"));	// Defining the thumbnail of our sample-video .
+			WebElement sampleVideo = driver.findElement(By.xpath("//div[@role='option']"));	// Defining the thumbnail of our sample-video .
 			new Actions(driver).doubleClick(sampleVideo).perform(); // Doubleclicking on the sample-video to upload.
 			driver.switchTo().defaultContent();	// Switching back to the main-frame.
 			if(false==driver.findElement(By.xpath("//img[@class='upload-thumb-img']")).isDisplayed()) {	// If we managed to start the uploading, a new title appears: "Upload status"

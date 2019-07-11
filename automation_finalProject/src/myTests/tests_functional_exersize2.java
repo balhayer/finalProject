@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 
 import myFunctions.Youtube;
 
-
 // Functional tests for YouTube site:
 //#1  Checks successful transition to the next video.
 //#2  Checks successful change of site language. 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -31,6 +32,7 @@ public class tests {
 			driver=Browser.OpenAgain(browsername);	// Our function that opens the same browser we've selected from above.
 		}
 		
+		Browser.Focus(driver);	// Our function that verifies the driver to stay focus on the test-window.
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //Since the elements on the site are loading relatively slowly, we'll add the option to wait until the elements will be enabled and clickable.
 		myExceptionCaught = false;	// Reseting the variable before each test.	
 	}
@@ -38,8 +40,17 @@ public class tests {
 	
 	
 	// We'll close the browser at the end of each test.
-	@After		
-	public void closeBrowser() throws IOException{
+	@After	
+	public void closeBrowser() {
+		
+		driver.quit();	// Closing all windows of the browser, opened by the test.		 
+	}
+	
+	
+	
+	// We'll kill the driver process in the end of all tests, to avoid overloading the memory.
+	@AfterClass		
+	public static void killDriverProcess() throws IOException {
 		
 		driver.quit();	// Closing all windows of the browser, opened by the test.
 		Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe /T"); 	// Killing the geckodriver process in the end of the test, to avoid overloading the memory.
