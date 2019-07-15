@@ -9,37 +9,15 @@ import org.openqa.selenium.By;
 import myFunctions.Youtube;
 
 // Functional tests for YouTube site:
-//#1  Checks successful transition to the next video.
-//#2  Checks successful change of site language. 
-//#3  Checks successful login to the site.
-//#4  Checks successful subscription to a channel.
-//#5  Checks successful addition of a video to the "watch later" list.
+//#1  Checks successful change of site language. 
+//#2  Checks successful subscription to a channel.
+//#3  Checks successful addition of a video to the "watch later" list.
+//#4  Checks successful transition to the next video.
 public class tests_functional_exersize2 extends tests{
 	
-
-	//#1	Checks successful transition to the next video.
-	//		We'll open a video, and use the "forward" button.
-	@Test		
-	public  void nextVideoCheck() throws InterruptedException {
-		
-		Youtube.openSample(driver);	// Our function, that finds and opens the sample video.
-
-		String firstVideo = driver.getTitle();	// Saving the title of the current page.
-		String nextVideo = driver.findElement(By.xpath("//h3[@class='style-scope ytd-compact-video-renderer']")).getText();	// Saving the name of the next-video, that located near the current video.
-		driver.findElement(By.xpath("//a[@aria-label='Next (SHIFT+n)']")).click();	// Clicking on a "forward" button.
-		Thread.sleep(2000);
-		if ((driver.getTitle().equals(firstVideo))) { // If we managed to click the button and to move to other video, then the page title has changed.
-			fail ("Failed move to another video!");						
-		} 
-		
-		// Test was successful if:
-		// the title of the new page contains the name of the "next video" we've saved before.
-		Assert.assertTrue(driver.getTitle().contains(nextVideo) ); // Verifying that the statement above is "true"
-	}
 	
 	
-	
-	//#2	Checks successful change of site language 
+	//#1	Checks successful change of site language 
 	//		We'll change the site language from English (default) to Hebrew in the Settings menu.
 	@Test		
 	public  void changeLanguageCheck() throws InterruptedException {
@@ -68,7 +46,7 @@ public class tests_functional_exersize2 extends tests{
 
 		
 	
-	//#3	Checks successful subscription to a channel
+	//#2	Checks successful subscription to a channel
 	//		We'll open a video, and use the "subscription" button.
 	@Test		
 	public  void subscribeCheck() throws InterruptedException {
@@ -100,7 +78,8 @@ public class tests_functional_exersize2 extends tests{
 	}
 
 
-	//#4	Checks successful addition of a video to the "Watch Later" list
+	
+	//#3	Checks successful addition of a video to the "Watch Later" list
 	//		We'll open a video, and use the "saving" button.
 	@Test		
 	public  void watchLaterCheck() throws InterruptedException {
@@ -141,6 +120,27 @@ public class tests_functional_exersize2 extends tests{
 		
 	}
 	
+	
+	
+	//#4	Checks successful transition to the next video.
+		//		We'll open a video, and use the "forward" button.
+		@Test		
+		public  void nextVideoCheck() throws InterruptedException {
+			
+			Youtube.openSample(driver);	// Our function, that finds and opens the sample video.
+
+			String firstVideo = driver.getTitle();	// Saving the title of the current page.
+			String nextVideo = driver.findElement(By.xpath("//h3[@class='style-scope ytd-compact-video-renderer']")).getText();	// Saving the name of the next-video, that located near the current video.
+			driver.findElement(By.xpath("//a[@aria-label='Next (SHIFT+n)']")).click();	// Clicking on a "forward" button.
+			Thread.sleep(2000);
+			if ((driver.getTitle().equals(firstVideo))) { // If we managed to click the button and to move to other video, then the page title has changed.
+				fail ("Failed move to another video!");						
+			} 
+			
+			// Test was successful if:
+			// the title of the new page contains the name of the "next video" we've saved before.
+			Assert.assertTrue(driver.getTitle().contains(nextVideo) ); // Verifying that the statement above is "true"
+		}
 	
 	
 }
